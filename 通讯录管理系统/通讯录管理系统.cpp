@@ -18,7 +18,7 @@ void showMenu() {
  
 
 int main() {
-	// 菜单调用
+	// 菜单调用.
 	showMenu();
 
 	system("pause");
