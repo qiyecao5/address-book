@@ -39,7 +39,7 @@ void showMenu() {
  
 
 int main() {
-	int select = 0;  //创建用户选择输入的变量
+	int select = 0;  //创建用户选择输入的变量.
 	
 	while (true)
 	{
