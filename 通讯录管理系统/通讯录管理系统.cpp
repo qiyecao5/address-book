@@ -23,7 +23,6 @@ struct Addressbooks {
 };
 
 
-
 // 菜单界面
 void showMenu() {
 	cout << "****************************" << endl;
@@ -36,11 +35,92 @@ void showMenu() {
 	cout << "*****	0、退出通讯录	*****" << endl;
 	cout << "****************************" << endl;
 }
- 
+// 1.添加联系人的函数	// 这里的参数Addressbooks* abs    这个abs就是个参数，理论上随便什么字母都行
+void addPerson(Addressbooks* abs) {
+	//判断通讯录是否已满，如果满了就不在添加
+	if (abs->m_Size == MAX)
+	{
+		cout << "通讯录已满，无法添加！" << endl;
+		return;  // 你不能返回东西
+	}
+	else
+	{
+		//添加具体联系人
+
+		//姓名
+		string name;
+		cout << "请输入姓名：" << endl;
+		cin >> name;
+		//创建结构体数组写几 就代表.例如personArray[0]  代表是这个结构体的第1个数组
+		// 这里的m_Size 在外面添加的时候会++，
+		abs->personArray[abs->m_Size].m_Name = name;
+
+		//性别
+		cout << "请输入性别：" << endl;
+		cout << "1 --- 男" << endl;
+		cout << "2 --- 女" << endl;
+		cout << "3 --- 保密" << endl;
+		int sex = 0;
+		while (true)
+		{	//	如果输入的是1或2 退出循环，因为输入正确
+			// 如果输入的有误 就重新输入
+			cin >> sex;
+			if (sex == 1 || sex == 2)
+			{
+				abs->personArray[abs->m_Size].m_Sex = sex;
+				break;
+			}
+			else
+			{
+				cout << "你输入的不正确" << endl;
+			}
+		}
+		//年龄
+		cout << "请输入年龄：" << endl;
+		int age = 0;
+		while (true)
+		{	//	如果输入的是1或2 退出循环，因为输入正确
+			// 如果输入的有误 就重新输入
+			cin >> age;
+			if (age < 100)
+			{
+				abs->personArray[abs->m_Size].m_Age = age;
+				break;
+			}
+			else
+			{
+				cout << "你输入的年龄太大了，请重新输入" << endl;
+			}
+		}
+		//电话
+		cout << "请输入联系电话：" << endl;
+		string phone;
+		cin >> phone;
+		abs->personArray[abs->m_Size].m_Phone = phone;
+		//住址
+		cout << "请输入家庭住址：" << endl;
+		string address;
+		cin >> address;
+		abs->personArray[abs->m_Size].m_Addr = address;
+		//更新通讯录人数
+		abs->m_Size++;
+		cout << "添加成功" << endl;
+		system("pause"); //请按任意键继续
+		system("cls"); //清屏操作
+
+
+	}
+
+}
 
 int main() {
-	int select = 0;  //创建用户选择输入的变量.
-	
+	//创建通讯录结构体变量 16.56
+	Addressbooks abs;
+	//初始化通讯录中当前人员个数
+	abs.m_Size = 0;
+
+	int select = 0;  //创建用户选择输入的变量
+
 	while (true)
 	{
 		// 菜单调用.
@@ -49,6 +129,7 @@ int main() {
 		switch (select)
 		{
 		case 1:		//1、添加联系人
+			addPerson(&abs);  //值传递不能修改实参，所以我们传地址
 			break;
 		case 2:		//2、显示联系人
 			break;
