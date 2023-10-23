@@ -138,11 +138,25 @@ void showPerson(Addressbooks * abs) {
 	system("cls"); //清屏操作
 
 }
+// 3.删除联系人
+// 检查联系人是否存在，如果存在，返回联系人所在数组中的具体位置，不存在返回-1
+int isExist(Addressbooks* abs, string name) {
+	//参数1：通讯录地址  参数2 对比的姓名
+	for (int i = 0; i < abs->m_Size; i++)
+	{
+		//找到用户输入的姓名了
+		if (abs->personArray[i].m_Name == name)
+		{
+			return i;//找到，返回此人在数组中的下标
+		}
+	}
+	return -1; //如果遍历结束都没有找到，返回-1
+}
 
 
-
+//18.28
 int main() {
-	//创建通讯录结构体变量 16.59
+	//创建通讯录结构体变量 
 	Addressbooks abs;
 	//初始化通讯录中当前人员个数
 	abs.m_Size = 0;
@@ -163,6 +177,18 @@ int main() {
 			showPerson(&abs);
 			break;
 		case 3:		//3、删除联系人
+		{//如果你用switch语句，判断中的语句很复杂，你要把这片都包起来，否则报错
+			cout << "请输入删除联系人姓名：" << endl;
+			string name;
+			cin >> name;
+			if (isExist(&abs, name) == -1) {
+				cout << "查无此人" << endl;
+			}
+			else
+			{
+				cout << "找到此人" << endl;
+			}
+		}
 			break;
 		case 4:		//4、查找联系人
 			break;
