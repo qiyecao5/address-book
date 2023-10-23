@@ -114,7 +114,7 @@ void addPerson(Addressbooks* abs) {
 }
 
 int main() {
-	//创建通讯录结构体变量 16.56
+	//创建通讯录结构体变量 16.59
 	Addressbooks abs;
 	//初始化通讯录中当前人员个数
 	abs.m_Size = 0;
