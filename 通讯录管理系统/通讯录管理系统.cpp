@@ -138,7 +138,7 @@ void showPerson(Addressbooks * abs) {
 	system("cls"); //清屏操作
 
 }
-// 3.删除联系人
+// 3.1删除联系人
 // 检查联系人是否存在，如果存在，返回联系人所在数组中的具体位置，不存在返回-1
 int isExist(Addressbooks* abs, string name) {
 	//参数1：通讯录地址  参数2 对比的姓名
@@ -152,9 +152,37 @@ int isExist(Addressbooks* abs, string name) {
 	}
 	return -1; //如果遍历结束都没有找到，返回-1
 }
+//3.2删除指定联系人
+void deletePerson(Addressbooks* abs) {
+	cout << "请输入您要删除的联系人" << endl;
+	string name;
+	cin >> name;
+	// ret == -1 未查到
+	// ret != -1 查到了
+	int ret = isExist(abs, name);
+	if ( ret != -1) {
+		//cout << "zhaodao" << endl;
+		//要删除李四，将李四后的数据做向前移动，并且让通讯录中记录的人员个数做-1的操作即可
+		//查找到人，要进行删除操作
+		for (int i = ret; i < abs->m_Size; i++)
+		{
+			//数据迁移
+			abs->personArray[i] = abs->personArray[i + 1];
+		}
+		abs->m_Size--;  // 更新通讯录中的人员数
+		cout<< "删除成功" << endl;
+	}
+	else
+	{  
+		cout << "查无此人" << endl;
+	}
+	system("pause");
+	system("cls");
+}
 
 
-//18.28
+
+//19.29
 int main() {
 	//创建通讯录结构体变量 
 	Addressbooks abs;
@@ -162,6 +190,7 @@ int main() {
 	abs.m_Size = 0;
 
 	int select = 0;  //创建用户选择输入的变量
+
 
 	while (true)
 	{
@@ -177,18 +206,19 @@ int main() {
 			showPerson(&abs);
 			break;
 		case 3:		//3、删除联系人
-		{//如果你用switch语句，判断中的语句很复杂，你要把这片都包起来，否则报错
-			cout << "请输入删除联系人姓名：" << endl;
-			string name;
-			cin >> name;
-			if (isExist(&abs, name) == -1) {
-				cout << "查无此人" << endl;
-			}
-			else
-			{
-				cout << "找到此人" << endl;
-			}
-		}
+		//{//如果你用switch语句，判断中的语句很复杂，你要把这片都包起来，否则报错
+		//	cout << "请输入删除联系人姓名：" << endl;
+		//	string name;
+		//	cin >> name;
+		//	if (isExist(&abs, name) == -1) {
+		//		cout << "查无此人" << endl;
+		//	}
+		//	else
+		//	{
+		//		cout << "找到此人" << endl;
+		//	}
+		//}
+			deletePerson(&abs);
 			break;
 		case 4:		//4、查找联系人
 			break;
