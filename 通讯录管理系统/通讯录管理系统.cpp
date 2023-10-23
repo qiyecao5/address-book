@@ -112,6 +112,34 @@ void addPerson(Addressbooks* abs) {
 	}
 
 }
+// 2.显示所有联系人
+void showPerson(Addressbooks * abs) {
+	//判断通讯录中人数是否为0，如果为0，提示记录为空
+	//如果不为0，显示记录的联系人信息
+	if (abs->m_Size == 0)
+	{
+		cout<< "当前记录为空" << endl;
+	}
+	else
+	{
+		//全部遍历出来打印
+		for (int i = 0; i < abs->m_Size; i++)
+		{
+			cout << "姓名：" << abs->personArray[i].m_Name << "\t";
+			// 三目运算符
+			cout << "性别：" << (abs->personArray[i].m_Sex ==1 ?"男":"女") << "\t";
+			cout << "年龄：" << abs->personArray[i].m_Age << "\t";
+			cout << "电话：" << abs->personArray[i].m_Phone << "\t";
+			cout << "家庭地址：" << abs->personArray[i].m_Addr << endl;
+
+		}
+	}
+	system("pause"); //请按任意键继续
+	system("cls"); //清屏操作
+
+}
+
+
 
 int main() {
 	//创建通讯录结构体变量 16.59
@@ -132,6 +160,7 @@ int main() {
 			addPerson(&abs);  //值传递不能修改实参，所以我们传地址
 			break;
 		case 2:		//2、显示联系人
+			showPerson(&abs);
 			break;
 		case 3:		//3、删除联系人
 			break;
