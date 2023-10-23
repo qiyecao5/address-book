@@ -180,9 +180,31 @@ void deletePerson(Addressbooks* abs) {
 	system("cls");
 }
 
+//4.查找指定联系人信息
+void findPerson(Addressbooks * abs) {
+	cout << "请输入您要查找的联系人" << endl;
+	string name;
+	cin >> name;
+	//判断指定的联系人是否存在通讯录中
+	int ret = isExist(abs, name);
+	if (ret != -1) //找到联系人
+	{
+		cout << "姓名：" << abs->personArray[ret].m_Name << "\t";
+		cout << "性别：" << (abs->personArray[ret].m_Sex ==1 ? "男":"女") << "\t";
+		cout << "年龄：" << abs->personArray[ret].m_Age << "\t";
+		cout << "电话：" << abs->personArray[ret].m_Phone << "\t";
+		cout << "住址：" << abs->personArray[ret].m_Addr << "\t";
+	}
+	else
+	{
+		cout << "查无此人" << endl;
+	}
+	system("pause");
+	system("cls");
+} 
 
 
-//19.29
+//20.05
 int main() {
 	//创建通讯录结构体变量 
 	Addressbooks abs;
@@ -221,6 +243,7 @@ int main() {
 			deletePerson(&abs);
 			break;
 		case 4:		//4、查找联系人
+			findPerson(&abs);
 			break;
 		case 5:		//5、修改联系人
 			break;
